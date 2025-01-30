@@ -3,49 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracker Overlay</title>
+    <title>MongoDB Tracker</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: transparent;
-            font-family: Arial, sans-serif;
-        }
-        .tracker-container {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 20px;
-            z-index: 1000;
-        }
-        .label {
-            font-weight: bold;
-        }
-        .count {
-            font-size: 24px;
-            color: #ffcc00;
-        }
+        body { font-family: Arial, sans-serif; }
+        #data-container { margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="tracker-container">
-        <div>
-            <span class="label">Count:</span> <span class="count" id="count">0</span>
-        </div>
+    <h1>MongoDB Tracker</h1>
+    <div id="data-container">
+        <!-- Data will be displayed here -->
     </div>
+
     <script>
-        let count = 0;
-        function updateCount() {
-            count++;
-            document.getElementById('count').innerText = count;
+        // Fetch data from the backend API
+        async function fetchData() {
+            try {
+                const response = await fetch('http://localhost:5000/data');
+                const data = await response.json();
+
+                // Display data in the container
+                const container = document.getElementById('data-container');
+                container.innerHTML = ''; // Clear existing content
+
+                data.forEach(item => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `<strong>${item.name}</strong>: ${item.value}`;
+                    container.appendChild(div);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
 
-        // Update count every second for demonstration
-        setInterval(updateCount, 1000);
+        // Call fetchData to load data when the page loads
+        window.onload = fetchData;
     </script>
 </body>
 </html>
