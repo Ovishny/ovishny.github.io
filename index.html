@@ -1,1 +1,51 @@
-"Hello World" 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracker Overlay</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: Arial, sans-serif;
+        }
+        .tracker-container {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 20px;
+            z-index: 1000;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .count {
+            font-size: 24px;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="tracker-container">
+        <div>
+            <span class="label">Count:</span> <span class="count" id="count">0</span>
+        </div>
+    </div>
+    <script>
+        let count = 0;
+        function updateCount() {
+            count++;
+            document.getElementById('count').innerText = count;
+        }
+
+        // Update count every second for demonstration
+        setInterval(updateCount, 1000);
+    </script>
+</body>
+</html>
