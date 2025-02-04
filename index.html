@@ -31,9 +31,11 @@
                 container.innerHTML = ''; // Clear existing content
 
                 data.forEach(item => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `<strong>${item.name}</strong>: ${item.points}`;
-                    container.appendChild(div);
+                    if(item.name == document.getElementById('summoner')){
+                        const div = document.createElement('div');
+                        div.innerHTML = `<strong>${item.name}</strong>: ${item.points}`;
+                        container.appendChild(div);
+                    }                    
                 });
             } catch (error) {
                 console.error('Error fetching data:', error);
